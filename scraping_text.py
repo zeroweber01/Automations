@@ -1,4 +1,5 @@
 from selenium import webdriver
+import time
 
 
 def get_driver(url) -> webdriver:
@@ -14,11 +15,14 @@ def get_driver(url) -> webdriver:
     driver.get(url)
     return driver
 
+def clean_text(text):
+    return text.split(": ")[1]
 
 def main():
     driver = get_driver("http://automated.pythonanywhere.com")
-    element = driver.find_element(by="xpath", value="/html/body/div[1]/div/h1[1]")
-    print(element.text)
+    time.sleep(2)
+    element = driver.find_element(by="xpath", value="/html/body/div[1]/div/h1[2]")
+    print(clean_text(element.text))
 
 
 if __name__ == '__main__':
